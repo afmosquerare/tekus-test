@@ -18,7 +18,7 @@ interface MenuItem {
     >
       <div class="flex items-center justify-center h-16 border-b border-gray-200">
         <h2
-          class="text-xl font-bold text-blue-600 "
+          class="text-xl font-bold text-blue-600 truncate "
           [class.text-center]="collapsed()"
         >
           {{ collapsed() ? 'T' : 'Tekus test' }}

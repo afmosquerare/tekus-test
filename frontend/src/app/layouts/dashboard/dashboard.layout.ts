@@ -17,7 +17,8 @@ import { HeaderComponent } from './components/header.component';
     SidenavComponent,
     HeaderComponent
   ],
-  template: `<mat-sidenav-container class="h-screen">
+  template: `
+  <mat-sidenav-container class="h-screen">
       <mat-sidenav
         class="!bg-black/5 !rounded-none border-r !border-gray-200 custom-animation"
         [style.width.px]="width()"
@@ -34,6 +35,7 @@ import { HeaderComponent } from './components/header.component';
 })
 export default class DashboardLayout {
   collapsed = signal(false);
+  opened = signal( true );
   width = computed(() => (this.collapsed() ? 64 : 200));
 
   
