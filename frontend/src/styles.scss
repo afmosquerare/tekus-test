@@ -1,0 +1,16 @@
+@use "tailwindcss";
+html, body {
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%; 
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.custom-animation {
+  transition-duration: 400ms !important;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  transition-property: width !important;
+}
