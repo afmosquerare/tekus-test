@@ -1,6 +1,6 @@
 namespace Domain.Primitives;
 
-public abstract class AgregateRoot
+public abstract class AggregateRoot : Entity
 {
     private readonly List<DomainEvent> _domainEvents = new();
     public ICollection<DomainEvent> GetDomainEvents() => _domainEvents;
