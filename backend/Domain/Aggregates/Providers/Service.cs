@@ -6,14 +6,17 @@ namespace Domain.Aggregates.Providers;
 
 public partial class Service : Entity
 {
+
+    public Guid ProviderId { get; private set; }
     public string Name { get; private set; }
     public decimal HourlyRate { get; private set; }
 
     public IReadOnlyList<Country> Countries => _countries.AsReadOnly();
 
     private readonly List<Country> _countries = new();
-    internal Service(string name, decimal hourlyRate, List<Country> countries)
+    internal Service(Guid providerId, string name, decimal hourlyRate, List<Country> countries)
     {
+        ProviderId = providerId;
         Name = name;
         HourlyRate = hourlyRate;
         _countries = countries ?? new List<Country>();

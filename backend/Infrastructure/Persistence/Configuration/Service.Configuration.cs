@@ -18,6 +18,9 @@ public class ServiceConfiguration : IEntityTypeConfiguration<Service>
             .IsRequired()
             .HasMaxLength(100);
 
+        builder.HasIndex(s => new { s.Id, s.Name }).IsUnique();
+
+
         builder.Property(s => s.HourlyRate)
             .HasPrecision(10, 2);
 
@@ -35,7 +38,7 @@ public class ServiceConfiguration : IEntityTypeConfiguration<Service>
                 .HasColumnName("Code")
                 .IsRequired();
 
-            // El composite key
+
             c.HasKey("ServiceId", "Code");
         });
     }

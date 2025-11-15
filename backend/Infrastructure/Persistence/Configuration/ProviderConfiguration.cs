@@ -14,17 +14,18 @@ public class ProviderConfiguration : IEntityTypeConfiguration<Provider>
         builder.HasKey(c => c.Id);
         builder.Property(p => p.Name).IsRequired().HasMaxLength(100);
         builder.Property(p => p.Nit).IsRequired().HasMaxLength(9);
+        builder.HasIndex(p => p.Nit).IsUnique();
         builder.Property(p => p.Email)
-            .HasConversion(email => email.Value, value => Email.Create(value)!)
+            .HasConversion( email => email.Value, value => Email.Create(value)!)
             .HasMaxLength(255);
         builder.HasIndex(p => p.Email).IsUnique();
-        
         builder.HasMany(p => p.Services)
             .WithOne()
             .HasForeignKey("ProviderId");
 
         builder.OwnsMany(p => p.CustomFields, cf =>
         {
+            cf.ToTable("CustomFields");
             cf.WithOwner().HasForeignKey("ProviderId");
             cf.Property(c => c.FieldName).IsRequired();
             cf.Property(c => c.FieldValue).IsRequired();

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class ServiceNameAsUnique : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,19 +29,18 @@ namespace Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CustomField",
+                name: "CustomFields",
                 columns: table => new
                 {
                     FieldName = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FieldValue = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FieldType = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FieldValue = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomField", x => new { x.ProviderId, x.FieldName });
+                    table.PrimaryKey("PK_CustomFields", x => new { x.ProviderId, x.FieldName });
                     table.ForeignKey(
-                        name: "FK_CustomField_Providers_ProviderId",
+                        name: "FK_CustomFields_Providers_ProviderId",
                         column: x => x.ProviderId,
                         principalTable: "Providers",
                         principalColumn: "Id",
@@ -93,6 +92,18 @@ namespace Infrastructure.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Providers_Nit",
+                table: "Providers",
+                column: "Nit",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Services_Name",
+                table: "Services",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Services_ProviderId",
                 table: "Services",
                 column: "ProviderId");
@@ -102,7 +113,7 @@ namespace Infrastructure.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CustomField");
+                name: "CustomFields");
 
             migrationBuilder.DropTable(
                 name: "ServiceCountries");

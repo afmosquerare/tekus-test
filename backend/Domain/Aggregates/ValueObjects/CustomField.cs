@@ -7,20 +7,19 @@ public record CustomField
 {
     public string FieldName { get; init; }
     public string FieldValue { get; init; }
-    public string FieldType { get; init; }
-    private CustomField(string fieldname, string fieldValue, string fieldType)
+    private CustomField(string fieldname, string fieldValue)
     {
         FieldName = fieldname;
         FieldValue = fieldValue;
-        FieldType = fieldType;
     }
 
-    protected CustomField() { } 
+    protected CustomField() { }
 
-    public static CustomField? Create( string fieldName, string fieldValue, string fieldType)
+    public static CustomField? Create(string fieldName, string fieldValue)
     {
-        if( string.IsNullOrWhiteSpace( fieldName) || string.IsNullOrWhiteSpace( fieldValue) || string.IsNullOrWhiteSpace( fieldType) ) return null;
-        return new CustomField( fieldName, fieldValue, fieldType);
+        if (string.IsNullOrWhiteSpace(fieldName) || string.IsNullOrWhiteSpace(fieldValue)) return null;
+        return new CustomField(fieldName, fieldValue);
     }
+
 
 }

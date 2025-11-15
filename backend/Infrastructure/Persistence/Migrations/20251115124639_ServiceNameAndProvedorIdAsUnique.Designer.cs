@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251115000606_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20251115124639_ServiceNameAndProvedorIdAsUnique")]
+    partial class ServiceNameAndProvedorIdAsUnique
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,9 @@ namespace Infrastructure.Persistence.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("Nit")
+                        .IsUnique();
+
                     b.ToTable("Providers", (string)null);
                 });
 
@@ -78,12 +81,15 @@ namespace Infrastructure.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<Guid?>("ProviderId")
+                    b.Property<Guid>("ProviderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProviderId");
+
+                    b.HasIndex("Id", "Name")
+                        .IsUnique();
 
                     b.ToTable("Services", (string)null);
                 });
@@ -98,17 +104,13 @@ namespace Infrastructure.Persistence.Migrations
                             b1.Property<string>("FieldName")
                                 .HasColumnType("nvarchar(450)");
 
-                            b1.Property<string>("FieldType")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
                             b1.Property<string>("FieldValue")
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("ProviderId", "FieldName");
 
-                            b1.ToTable("CustomField");
+                            b1.ToTable("CustomFields", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ProviderId");
@@ -121,7 +123,9 @@ namespace Infrastructure.Persistence.Migrations
                 {
                     b.HasOne("Domain.Aggregates.Providers.Provider", null)
                         .WithMany("Services")
-                        .HasForeignKey("ProviderId");
+                        .HasForeignKey("ProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.OwnsMany("Domain.Aggregates.Providers.ValueObjects.Country", "Countries", b1 =>
                         {

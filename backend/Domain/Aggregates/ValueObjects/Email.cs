@@ -6,7 +6,7 @@ public partial record Email
 {
     public string Value { get; init; }
     private const string Pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-    private Email(string email) => Value = email;
+    protected Email(string email) => Value = email;
 
     public static Email? Create( string email)
     {
@@ -16,8 +16,6 @@ public partial record Email
         }
         return new Email( email );
     }
-
-    
 
     [GeneratedRegex( pattern: Pattern)]
     private static partial Regex EmailRegex();
