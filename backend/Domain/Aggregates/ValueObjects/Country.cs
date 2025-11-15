@@ -10,7 +10,8 @@ public record Country
         Name = name;
         Code = code;
     }
-
+    
+    protected Country() { }
     public static Country? Create(string name, string code)
     {
         if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(code))

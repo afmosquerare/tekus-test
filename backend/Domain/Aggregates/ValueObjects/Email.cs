@@ -17,6 +17,8 @@ public partial record Email
         return new Email( email );
     }
 
+    
+
     [GeneratedRegex( pattern: Pattern)]
     private static partial Regex EmailRegex();
 

@@ -24,6 +24,8 @@ public partial class Service : Entity
             _countries.Add(country);
     }
 
+    private Service(){}
+
     internal void RemoveCountry(string code)
     {
         _countries.RemoveAll(c => c.Code == code);

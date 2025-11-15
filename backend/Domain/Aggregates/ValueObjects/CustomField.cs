@@ -15,6 +15,8 @@ public record CustomField
         FieldType = fieldType;
     }
 
+    protected CustomField() { } 
+
     public static CustomField? Create( string fieldName, string fieldValue, string fieldType)
     {
         if( string.IsNullOrWhiteSpace( fieldName) || string.IsNullOrWhiteSpace( fieldValue) || string.IsNullOrWhiteSpace( fieldType) ) return null;

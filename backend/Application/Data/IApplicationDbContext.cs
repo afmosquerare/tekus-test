@@ -1,11 +1,11 @@
-using Domain.Providers;
+using Domain.Aggregates.Providers;
+using Domain.Primitives;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Data;
 
 public interface IApplicationDbContext
 {
-    DbSet<Provider> Providers { get; set; }
-
-    Task<int> SaveChangeAsync( CancellationToken c = default );
+    public DbSet<Provider> Providers { get; set; }
+    Task<int> SaveChangesAsync( CancellationToken cancellationToken = default);
 }

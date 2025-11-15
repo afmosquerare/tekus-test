@@ -19,8 +19,8 @@ internal sealed class CreateProviderCommandHandle( IProviderRepository providerR
         }
 
         var provider = new Provider( req.Name, req.Nit, email);
-        var guid =  await _providerRepository.AddAsync( provider );
+        await _providerRepository.AddAsync( provider );
         await _unitOfWork.SaveChangesAsync( cancellationToken );
-        return guid;
+        return provider.Id;
     }
 }
