@@ -58,8 +58,7 @@ internal sealed class CreateProviderCommandHandle(IProviderRepository providerRe
                 .Cast<Country>()
                 .ToList() ?? new List<Country>();
 
-
-            provider.AddService(s.Name, s.HourlyRate, countries);
+            provider.AddService(s.Name, s.HourlyRate);
         }
     }
 

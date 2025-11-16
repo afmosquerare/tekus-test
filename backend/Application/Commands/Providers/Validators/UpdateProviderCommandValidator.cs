@@ -3,10 +3,10 @@ using FluentValidation;
 
 namespace Application.Commands.Providers.Validators;
 
-public class CreateProviderCommandValidator : AbstractValidator<CreateProviderCommand>
+public class UpdateProviderCommandValidator : AbstractValidator<UpdateProviderCommand>
 {
     
-    public CreateProviderCommandValidator()
+    public UpdateProviderCommandValidator()
     {
         RuleFor(r=> r.Name )
             .NotEmpty()

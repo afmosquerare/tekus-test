@@ -48,12 +48,6 @@ public class ProvidersRepository(ApplicationDbContext context) : IProviderReposi
         _context.Providers.Remove(provider);
     }
 
-    public async Task<Provider> UpdateProviderAsync(Provider provider)
-    {
-        _context.Providers.Update(provider);
-        return provider;
-    }
-
     public async Task<bool> ExistsByNitAsync(string nit)
     {
         return await _context.Providers.AnyAsync(p => p.Nit == nit);

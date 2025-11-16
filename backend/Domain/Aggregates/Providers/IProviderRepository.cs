@@ -10,8 +10,6 @@ public interface IProviderRepository
     Task<Provider?> GetByEmailAsync( string email);
     Task<IEnumerable<Provider>> GetAllAsync();
     Task RemoveAsync(Provider provider);
-    Task<Provider> UpdateProviderAsync(  Provider provider );
-
     Task<bool> ExistsByNitAsync(string nit);
     Task<bool> ExistsByEmailAsync(string email);
 

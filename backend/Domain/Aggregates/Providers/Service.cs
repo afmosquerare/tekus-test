@@ -4,9 +4,8 @@ using Domain.Primitives;
 
 namespace Domain.Aggregates.Providers;
 
-public partial class Service : Entity
+public partial class Service : Entity<int>
 {
-
     public Guid ProviderId { get; private set; }
     public string Name { get; private set; }
     public decimal HourlyRate { get; private set; }
@@ -21,13 +20,20 @@ public partial class Service : Entity
         HourlyRate = hourlyRate;
         _countries = countries ?? new List<Country>();
     }
+    internal Service(Guid providerId, string name, decimal hourlyRate)
+    {
+        Id = 0;
+        ProviderId = providerId;
+        Name = name;
+        HourlyRate = hourlyRate;
+    }
     internal void AddCountry(Country country)
     {
         if (!_countries.Any(c => c.Equals(country)))
             _countries.Add(country);
     }
 
-    private Service(){}
+    private Service() { }
 
     internal void RemoveCountry(string code)
     {
